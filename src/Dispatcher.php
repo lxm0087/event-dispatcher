@@ -16,7 +16,17 @@ class Dispatcher implements EventDispatcherInterface, ListenerProviderInterface
      *
      * @var callable[][]
      */
-    private array $listeners = [];
+    private array $listeners;
+
+    /**
+     * 初始化事件侦听器列表
+     *
+     * @param callable[][] $listeners
+     */
+    public function __construct(array $listeners = [])
+    {
+        $this->listeners = $listeners;
+    }
 
     /**
      * 分发事件
@@ -57,10 +67,10 @@ class Dispatcher implements EventDispatcherInterface, ListenerProviderInterface
      * 添加事件侦听器
      *
      * @param string $event
-     * @param callable $listener
+     * @param ListenerInterface $listener
      * @return void
      */
-    public function on(string $event, callable $listener): void
+    public function on(string $event, ListenerInterface $listener): void
     {
         $this->listeners[$event][] = $listener;
     }
