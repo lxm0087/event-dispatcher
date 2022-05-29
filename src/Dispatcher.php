@@ -60,7 +60,7 @@ class Dispatcher implements EventDispatcherInterface, ListenerProviderInterface
      */
     public function getListenersForEvent(object $event): array
     {
-        return $this->listeners[get_class($event)];
+        return $this->listeners[get_class($event)] ?? [];
     }
 
     /**
